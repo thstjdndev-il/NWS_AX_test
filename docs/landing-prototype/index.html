@@ -362,6 +362,25 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .final { padding: 72px 80px; } .final .fg { gap: 48px; } .dgroup { display: grid; justify-items: center; gap: 8px; }
 .final .dlabel { font-size: 15px; } .dday { font-size: 84px; font-weight: 600; } .final .h2, .final .lead { margin-top: 0; }
 @media (max-width: 960px) { .finder, .faq-grid, .tl-wrap { grid-template-columns: 1fr; } .final { padding: 48px 24px; } }
+
+/* ---- 07 timeline + summary: Figma 134:557 ---- */
+.tl-wrap { align-items: stretch; }
+.tl { padding-left: 40px; }
+.tl-rail, .tl-fill { top: 24px; bottom: 24px; }
+.tl-item { padding: 16px 0; min-height: 138px; padding-bottom: 16px; }
+.tl-item::before { top: 16px; }
+.tl-item time { display: block; font-size: 15px; font-weight: 500; line-height: 23px; color: var(--sky); }
+.tl-item h3 { margin: 4px 0 0; font-size: 20px; font-weight: 700; line-height: 30px; color: var(--white); }
+.tl-item p { margin-top: 12px; font-size: 15px; line-height: 23px; color: var(--g600); }
+.tl-item:not(.on) time, .tl-item:not(.on) h3 { opacity: 1; }
+.tl-glow { position: absolute; left: -82px; top: -21px; width: 180px; height: 180px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(197,212,255,.55), rgba(197,212,255,0)); transition: top .5s var(--ease-out); }
+.summary { position: static; display: flex; flex-direction: column; justify-content: space-between; gap: 33px; padding: 20px 24px; }
+.summary dl { gap: 0; display: flex; flex-direction: column; justify-content: space-between; flex: 1; gap: 33px; }
+.summary dt { font-size: 13px; font-weight: 600; line-height: 20px; color: var(--g400); }
+.summary dd { margin-top: 8px; font-size: 18px; font-weight: 500; line-height: 27px; color: var(--g50); }
+.summary .btn { width: 100%; }
+.tl-item .tl-done { position: absolute; left: 0; bottom: -22px; margin-top: 0; }
 </style>
 
 <header class="site-hdr">
@@ -805,10 +824,10 @@ function glowTabs(box, glow, labels, onPick, start = 0) {
 /* ---------- 07 timeline ---------- */
 { const D = {
     one: { lead: '2시간 기초 세미나로 AI 세팅과 Git, 핵심 개념을 다진 뒤 문의 폼이 연동된 랜딩 페이지를 구현해요.', btn: '원데이 클래스 신청하기',
-      items: [['12:00~14:00', '바이브코딩 기초 세미나', 'ChatGPT와 Claude 세팅, Git 버전 관리, 프론트엔드와 DB 등 필수 개념을 2시간 동안 압축해 익혀요.'],
-        ['14:00~18:00', '실전 랜딩 페이지 제작', '반응형 화면을 구현하고 실시간 데이터베이스(DB)로 문의 폼을 연결해요. 막히는 구간은 전담 멘토가 즉시 해결해요.'],
+      items: [['12:00~14:00', '바이브코딩 기초 세미나', 'ChatGPT와 Claude 세팅, Git 버전 관리, 프론트엔드와 DB 등 필수 개념을 다져요.'],
+        ['14:00~18:00', '실전 랜딩 페이지 제작', '반응형 화면을 구현하고 실시간 데이터베이스(DB)로 문의 폼을 연결해요.'],
         ['18:00~19:00', '저녁 식사 및 휴식', '한 시간 동안 식사하며 쉬어 가고, 저녁 세션에 만들 개별 프로젝트 주제를 정리해요.'],
-        ['19:00~21:00', '개별 프로젝트 완성과 배포', '내 아이디어를 구현해 누구나 접속할 수 있는 실제 웹 주소로 배포하고, 스마트폰으로 공유하며 마무리해요.']],
+        ['19:00~21:00', '개별 프로젝트 완성과 배포', '내 아이디어를 구현해 누구나 접속할 수 있는 실제 웹 주소로 배포하고, 스마트폰으로 공유해요.']],
       sum: [['가져가는 결과물', '누구나 접속할 수 있는 내 웹 서비스 1개 · 수료증 발급 포함'], ['만들 수 있는 범위', '문의 폼이 연결된 랜딩 페이지, 포트폴리오, 브랜드 웹, 단일 기능 자동화 툴'], ['개발 환경', '검증된 현업 웹 스택과 실시간 DB, 클라우드 배포'], ['장소', '서울 마포구 합정역 도보 5분, 회차당 선착순 6명']] },
     wk: { lead: '토요일 낮 12시부터 일요일 밤 9시까지, 로그인과 실시간 DB, 관리자 화면이 있는 서비스를 완성해요.', btn: '주말 과정 신청하기', items: null,
       sum: [['일정', '12월 12일~13일 첫 오픈, 토 12:00 ~ 일 21:00 (총 16시간)'], ['만들 수 있는 범위', '회원가입, 로그인, 실시간 DB, 관리자 화면 구현'], ['정원', '회차당 선착순 6명, 멘토 2~3명 밀착 배치'], ['장소', '서울 마포구 합정역 도보 5분']] },
@@ -817,12 +836,12 @@ function glowTabs(box, glow, labels, onPick, start = 0) {
   const box = $('tlBox');
   function render(k) { const d = D[k]; $('tlLead').textContent = d.lead; $('tlBtn').textContent = d.btn;
     $('tlSum').innerHTML = d.sum.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('');
-    box.innerHTML = d.items ? `<div class="tl" id="tl"><span class="tl-rail"></span><span class="tl-fill" id="tlFill"></span>${d.items.map((it, i) => `<div class="tl-item"><time>${it[0]}</time><h3>${it[1]}</h3><p>${it[2]}</p>${i === d.items.length - 1 ? '<span class="tl-done" id="tlDone">배포 완료 · my-service.app</span>' : ''}</div>`).join('')}</div>`
+    box.innerHTML = d.items ? `<div class="tl" id="tl"><span class="tl-glow" id="tlGlow"></span><span class="tl-rail"></span><span class="tl-fill" id="tlFill"></span>${d.items.map((it, i) => `<div class="tl-item"><time>${it[0]}</time><h3>${it[1]}</h3><p>${it[2]}</p>${i === d.items.length - 1 ? '<span class="tl-done" id="tlDone">배포 완료 · my-service.app</span>' : ''}</div>`).join('')}</div>`
       : `<p class="tl-note">이 코스의 시간대별 타임라인은 시안 확정 후 입력할 예정이에요. 오른쪽에서 일정과 구성을 확인해 주세요.</p>`; onScroll(); }
   // hover (or tap / keyboard focus) lights the item and every step before it
   function light(i) { const tl = $('tl'); if (!tl) return; const items = [...tl.querySelectorAll('.tl-item')];
     const it = items[i], dot = it.offsetTop + 12, p = clamp(dot / tl.offsetHeight);
-    $('tlFill').style.setProperty('--p', i === 0 ? 0 : p); items.forEach((x, j) => x.classList.toggle('on', j <= i)); $('tlDone').classList.toggle('on', i === items.length - 1); }
+    $('tlFill').style.setProperty('--p', i === 0 ? 0 : p); $('tlGlow').style.top = (it.offsetTop + 24 - 90) + 'px'; items.forEach((x, j) => x.classList.toggle('on', j <= i)); $('tlDone').classList.toggle('on', i === items.length - 1); }
   function onScroll() { const tl = $('tl'); if (!tl) return; tl.querySelectorAll('.tl-item').forEach((it, i) => {
       it.tabIndex = 0; it.addEventListener('mouseenter', () => light(i)); it.addEventListener('focus', () => light(i)); it.addEventListener('click', () => light(i)); });
     light(0); }
