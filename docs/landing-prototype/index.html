@@ -22,7 +22,7 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-section { scroll-margin-top: 72px; }
+section { scroll-margin-top: 80px; }
 body { margin: 0; background: var(--white); color: var(--g900); font-family: var(--font); letter-spacing: -0.01em; word-break: keep-all; }
 img { max-width: 100%; display: block; }
 button { font: inherit; cursor: pointer; }
@@ -65,13 +65,21 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--deep); outline-
 
 /* header */
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: rgba(255,255,255,.85); }
-.site-hdr { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(255,255,255,.75); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(230,232,234,.6); }
-.site-hdr .col { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1312px; }
-.logo { font-weight: 700; font-size: 18px; color: var(--indigo); text-decoration: none; }
-.nav { display: flex; align-items: center; gap: 28px; font-size: 15px; font-weight: 500; }
-.nav a { color: var(--g700); text-decoration: none; } .nav a:hover { color: var(--deep); }
-.nav .btn { padding: 9px 18px; font-size: 14px; color: var(--white); }
-@media (max-width: 860px) { .nav a:not(.btn) { display: none; } }
+.site-hdr { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--white); }
+/* Figma Header (61:8142): 72px, side padding 64, logo + divider + title | menu (gap 28) + CTA (gap 32) */
+.site-hdr .col { display: flex; align-items: center; justify-content: space-between; height: 72px; max-width: 1440px;
+  padding-left: max(64px, env(safe-area-inset-left, 0px)); padding-right: max(64px, env(safe-area-inset-right, 0px)); }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; padding-block: 12px; }
+.brand img { width: 192px; height: 15px; }
+.brand .div { width: 1px; height: 16px; background: var(--g300); }
+.brand b { font-size: 17px; font-weight: 700; line-height: 25.5px; letter-spacing: -0.34px; color: var(--g900); }
+.nav { display: flex; align-items: center; gap: 32px; }
+.nav-list { display: flex; align-items: center; gap: 28px; }
+.nav-list a { font-size: 14px; font-weight: 600; line-height: 21.7px; color: var(--g700); text-decoration: none; transition: color .2s; }
+.nav-list a:hover { color: var(--deep); }
+.nav .btn { padding: 8px 20px; font-size: 14px; font-weight: 600; line-height: 21.7px; color: var(--white); background: var(--indigo); }
+@media (max-width: 960px) { .site-hdr .col { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); } .nav-list { display: none; } .brand img { width: 150px; height: auto; } }
+
 
 /* ===== HERO (1440×900 stage) ===== */
 .hero-vp { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; aspect-ratio: 1440 / 900; overflow: hidden; }
@@ -358,8 +366,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 <header class="site-hdr">
   <div class="col">
-    <a class="logo" href="#top">바이브코딩 캠프</a>
-    <nav class="nav"><a href="#show">만들 수 있는 것</a><a href="#curr">커리큘럼</a><a href="#courses">코스</a><a href="#team">팀 매칭</a><a href="#faq">FAQ</a><a class="btn primary" href="#final">신청하기</a></nav>
+    <a class="brand" href="#top" aria-label="New Web Solutions 바이브코딩 캠프 처음으로"><img src="img/nws-logo.png" alt="New Web Solutions"><span class="div" aria-hidden="true"></span><b>바이브코딩 캠프</b></a>
+    <nav class="nav" aria-label="주요 메뉴"><div class="nav-list"><a href="#show">만들 수 있는 것</a><a href="#curr">커리큘럼</a><a href="#courses">코스</a><a href="#team">팀 매칭</a><a href="#faq">FAQ</a></div><a class="btn primary" href="#final">신청하기</a></nav>
   </div>
 </header>
 
@@ -502,7 +510,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
       <span class="eq-op">+</span>
       <div class="eq-item" data-x style="--x:80px"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="#4775DB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg></span>개발</div>
       <span class="eq-op">=</span>
-      <div class="eq-item eq-team"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:36px;height:36px"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2.5 19a5.5 5.5 0 0 1 9-4.2M21.5 19a5.5 5.5 0 0 0-9-4.2"/></svg></span>한 팀 완성</div>
+      <div class="eq-item eq-team"><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2.5 19a5.5 5.5 0 0 1 9-4.2M21.5 19a5.5 5.5 0 0 0-9-4.2"/></svg></span>한 팀 완성</div>
     </div>
     <div class="tsteps" id="tsteps">
       <div class="tcard rv"><span class="n">01</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#4775DB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6a1 1 0 0 1 1 1v1H8V5a1 1 0 0 1 1-1z"/><path d="M16 5h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2"/><path d="M9 12h6M9 16h4"/></svg></span><h3>팀 트랙 신청</h3><p>관심 분야를 가볍게 적어요. 지인과 동반 신청 시 같은 팀으로 배정돼요.</p></div>
